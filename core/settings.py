@@ -31,6 +31,7 @@ if DEBUG:
     load_dotenv()
 
 ALLOWED_HOSTS = [
+    getenv('ALLOWED_HOST'),
     '127.0.0.1',
     '*.herokuapp.com',
 ]
