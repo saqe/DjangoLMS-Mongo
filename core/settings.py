@@ -47,13 +47,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #Installed Apps
+    #[Installed Apps]
+    # Django Rest Framework for APIs
     'rest_framework',
     # DjangoStorages for S3 Buckets
     'storages',
+    'phonenumber_field',
 
     # API
     'api.apps.ApiConfig',
+    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
@@ -136,13 +139,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (BASE_DIR / "static",)
+
 # Extra places for collectstatic to find static files.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-
-
+# Django Storages
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_S3_REGION_NAME      = getenv('AWS_S3_REGION_NAME')
