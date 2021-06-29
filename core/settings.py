@@ -44,6 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #Installed Apps
+    'rest_framework',
+    # DjangoStorages for S3 Buckets
+    'storages',
+
+    # API
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -54,11 +62,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-
-    # WhiteNoise for static file collection
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -80,10 +83,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-
-
-
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -130,7 +129,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+
+AWS_S3_REGION_NAME      = getenv('AWS_S3_REGION_NAME')
+AWS_S3_ENDPOINT_URL     = getenv('AWS_S3_ENDPOINT_URL')
+AWS_ACCESS_KEY_ID       = getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY   = getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_OBJECT_PARAMETERS = { 'CacheControl': 'max-age=86400',}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
