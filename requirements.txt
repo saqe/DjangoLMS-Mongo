@@ -18,7 +18,7 @@ python-dotenv==0.18.0
 pytz==2021.1
 s3transfer==0.4.2
 six==1.16.0
-sqlparse==0.2.4
+sqlparse==0.4.4
 urllib3==1.26.6
 uuid==1.30
 whitenoise==5.2.0
